@@ -8,15 +8,13 @@
 
 import Foundation
 
-public typealias NetworkRouterCompletion = (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> ()
 
-public typealias NetworkRouterResultCompletion = (_ result: Result<Data?, Error>, _ response: URLResponse?) -> ()
+public typealias NetworkRouterCompletion = (_ result: Result<Data?, Error>, _ response: URLResponse?) -> ()
 
 protocol NetworkRouter: class {
 	
 	associatedtype EndPoint: EndPointType
-	
+
 	func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion)
-	func request(_ route: EndPoint, completion: @escaping NetworkRouterResultCompletion)
 	func cancel()
 }

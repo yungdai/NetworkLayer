@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftUI
+
 
 struct NetworkManager {
 	
@@ -24,11 +26,9 @@ struct NetworkManager {
 		case unableToDecode = "We would not decode the response."
 	}
 
-	
 	fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> NetworkResponseError {
 		
 		switch response.statusCode {
-			
 		case 401...500: return .authenticationError
 		case 501...599: return .badRequest
 		case 600: return .outdated

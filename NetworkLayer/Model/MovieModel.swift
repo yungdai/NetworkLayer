@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct MovieApiResponse {
-	
+
 	let page: Int
 	let numberOfResults: Int
 	let numberOfPages: Int
@@ -37,7 +38,7 @@ extension MovieApiResponse: Decodable {
 	}
 }
 
-struct Movie {
+struct Movie: Identifiable {
 	
 	let id: Int
 	let posterPath: String

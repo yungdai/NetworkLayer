@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -22,7 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Use a UIHostingController as window root view controller
 		if let windowScene = scene as? UIWindowScene {
 		    let window = UIWindow(windowScene: windowScene)
-		    window.rootViewController = UIHostingController(rootView: ContentView())
+			
+			let movieStore = MovieStore.init(networkManager: NetworkManager())
+		    window.rootViewController = UIHostingController(rootView: ContentView().environmentObject(movieStore))
 		    self.window = window
 		    window.makeKeyAndVisible()
 		}

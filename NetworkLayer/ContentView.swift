@@ -9,15 +9,30 @@
 import SwiftUI
 
 struct ContentView : View {
+	
+	@EnvironmentObject var movieStore: MovieStore
+	
     var body: some View {
-        Text("Hello World")
-    }
+		NavigationView {
+			
+			List(movieStore.movies) { movie in
+
+				MovieRow(movie: movie)
+			}
+			.navigationBarTitle(Text("Movies"))
+		}
+		.onAppear {
+			self.movieStore.fetchMoviesOn(page: 1)
+		}
+		
+	}
 }
 
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
         ContentView()
+			.environmentObject(MovieStore(networkManager: NetworkManager()))
     }
 }
 #endif
