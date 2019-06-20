@@ -16,16 +16,20 @@ struct ContentView : View {
 		NavigationView {
 			
 			List(movieStore.movies) { movie in
-
-				MovieRow(movie: movie)
+				
+				NavigationButton(destination: MovieDetails(movie: movie)) {
+					MovieRow(movie: movie)
+				}
 			}
-			.navigationBarTitle(Text("Movies"))
+			
+			.navigationBarTitle(Text("Movies Now Playing"))
+
 		}
 		.onAppear {
 			self.movieStore.fetchMoviesOn(page: 1)
 		}
-		
 	}
+	
 }
 
 #if DEBUG

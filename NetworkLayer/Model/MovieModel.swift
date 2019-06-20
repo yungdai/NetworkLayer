@@ -74,4 +74,24 @@ extension Movie: Decodable {
 		rating = try movieContainer.decode(Double.self, forKey: .rating)
 		overview = try movieContainer.decode(String.self, forKey: .overview)
 	}
+	
+	func getImageFrom(urlString: String, completion: @escaping(Image) -> ()) {
+		
+		
+		let fullURLString = "https://image.tmdb.org/t/p/original/\(urlString)"
+		
+		if let url = URL(string: fullURLString) {
+			
+			DispatchQueue.global().async {
+				
+				if let data = try? Data(contentsOf: url),
+					let uiImage = UIImage(data: data) {
+					
+					completion(Image(uiImage: uiImage))
+				}
+			}
+		}
+	}
 }
+
+

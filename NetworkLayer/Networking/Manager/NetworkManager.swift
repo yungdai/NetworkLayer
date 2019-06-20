@@ -13,7 +13,7 @@ import SwiftUI
 struct NetworkManager {
 	
 	static let environment: NetworkEnvironment = .production
-	static let MovieAPIKey = "YOUR_API_KEY"
+	static let MovieAPIKey = "e1173bbcee786360ebe461850cd3d7a1"
 	private let router = Router<MovieApi>()
 	
 	enum NetworkResponseError: String, Error {

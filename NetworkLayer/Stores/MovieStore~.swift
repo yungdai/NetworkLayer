@@ -45,24 +45,3 @@ class MovieStore: BindableObject {
 		}
 	}
 }
-
-//
-//extension UIImage {
-//	
-//	func loadImageFrom(urlString: String) {
-//		
-//		guard let url = URL(string: urlString) else { print("The string is not a URL String")
-//			return
-//		}
-//		
-//		DispatchQueue.global().async {
-//			
-//			if let data = try? Data(contentsOf: url),
-//				let image = UIImage(data: data) {
-//				DispatchQueue.main.async {
-//					self = image
-//				}
-//			}
-//		}
-//	}
-//}
