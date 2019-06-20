@@ -1,4 +1,4 @@
-# NetworkLayer
+# NetworkLayer demo with SwiftUI
 
 Using a network layer with SwiftUI
 
