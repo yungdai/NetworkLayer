@@ -75,20 +75,42 @@ extension Movie: Decodable {
 		overview = try movieContainer.decode(String.self, forKey: .overview)
 	}
 	
-	func getImageFromPosterPath(completion: @escaping(Image) -> ()) {
-		
-		
+	func getImageForPosterPath(completion: @escaping(Image) -> ()) {
+
 		let fullURLString = "https://image.tmdb.org/t/p/original/\(self.posterPath)"
 		
 		if let url = URL(string: fullURLString) {
 			
-			DispatchQueue.global().async {
+			Image.getImageFrom(url: url) { image in
+				completion(image)
+			}
+		}
+	}
+	
+	func getImageForBackdropPath(completion: @escaping(Image) ->()) {
+		
+		let fullURLString = "https://image.tmdb.org/t/p/original/\(self.backdrop)"
+		
+		if let url = URL(string: fullURLString) {
+			
+			Image.getImageFrom(url: url) { image in
+
+				completion(image)
+			}
+		}
+	}
+}
+
+extension Image {
+	
+	static func getImageFrom(url: URL, completion: @escaping(Image) -> ()) {
+
+		DispatchQueue.global().async {
+			
+			if let data = try? Data(contentsOf: url),
+				let uiImage = UIImage(data: data) {
 				
-				if let data = try? Data(contentsOf: url),
-					let uiImage = UIImage(data: data) {
-					
-					completion(Image(uiImage: uiImage))
-				}
+				completion(Image(uiImage: uiImage))
 			}
 		}
 	}

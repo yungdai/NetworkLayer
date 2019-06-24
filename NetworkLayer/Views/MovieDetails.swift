@@ -12,8 +12,11 @@ struct MovieDetails : View {
 	
 	let movie: Movie
 	
-	@State var image: Image = Image(systemName: "photo")
-	@State var imageVisible = false
+	@State var posterImage: Image = Image(systemName: "photo")
+	@State var backdropImage: Image = Image(systemName: "photo")
+	
+	@State var posterVisible = false
+	@State var backdropVisible = false
 	
 	var body: some View {
 		
@@ -21,11 +24,13 @@ struct MovieDetails : View {
 			
 			ZStack(alignment: .center) {
 				
-				if self.imageVisible {
-					self.image
+				if self.backdropVisible {
+					self.backdropImage
 						.resizable()
-						.blur(radius: 15, opaque: false)
+						.scaledToFill()
+						.blur(radius: 15, opaque: true)
 						.opacity(0.3)
+						.frame(width: geometry.size.width, height: geometry.size.height)
 						.animation(.basic(duration: 0.3, curve: .easeInOut))
 				}
 
@@ -41,8 +46,8 @@ struct MovieDetails : View {
 						
 						Spacer()
 						
-						if self.imageVisible {
-							self.image
+						if self.posterVisible {
+							self.posterImage
 								.resizable()
 								.frame(width: 60, height: 90)
 								.scaledToFit()
@@ -64,11 +69,17 @@ struct MovieDetails : View {
 				.padding(.horizontal, 10.0)
 				.onAppear {
 						
-					self.movie.getImageFromPosterPath()
+					self.movie.getImageForPosterPath
 					{ image in
 							
-						self.image = image
-						self.imageVisible = true
+						self.posterImage = image
+						self.posterVisible = true
+					}
+					
+					self.movie.getImageForBackdropPath { image in
+						
+						self.backdropImage = image
+						self.backdropVisible = true
 					}
 				}
 			}
@@ -80,7 +91,7 @@ struct MovieDetails : View {
 #if DEBUG
 struct MovieDetails_Previews : PreviewProvider {
 	static var previews: some View {
-		MovieDetails(movie: testMovie, image: Image("black-panther"), imageVisible: true)
+		MovieDetails(movie: testMovie, posterImage: Image("black-panther"), backdropImage: Image("black-panther"), posterVisible: true, backdropVisible: true)
 	}
 }
 #endif
