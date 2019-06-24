@@ -75,10 +75,10 @@ extension Movie: Decodable {
 		overview = try movieContainer.decode(String.self, forKey: .overview)
 	}
 	
-	func getImageFrom(urlString: String, completion: @escaping(Image) -> ()) {
+	func getImageFromPosterPath(completion: @escaping(Image) -> ()) {
 		
 		
-		let fullURLString = "https://image.tmdb.org/t/p/original/\(urlString)"
+		let fullURLString = "https://image.tmdb.org/t/p/original/\(self.posterPath)"
 		
 		if let url = URL(string: fullURLString) {
 			

@@ -64,7 +64,7 @@ struct MovieDetails : View {
 				.padding(.horizontal, 10.0)
 				.onAppear {
 						
-					self.movie.getImageFrom(urlString: self.movie.posterPath)
+					self.movie.getImageFromPosterPath()
 					{ image in
 							
 						self.image = image

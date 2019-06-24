@@ -32,11 +32,27 @@ struct ContentView : View {
 	
 }
 
+struct NewList: View {
+	
+	var body: some View {
+		
+		HStack {
+			Text("Left Text")
+			Spacer()
+			Image(systemName: "picture")
+		}
+	}
+}
+
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        ContentView()
-			.environmentObject(MovieStore(networkManager: NetworkManager()))
+		Group {
+			ContentView()
+				.environmentObject(MovieStore(networkManager: NetworkManager()))
+			
+			NewList()
+		}
     }
 }
 #endif

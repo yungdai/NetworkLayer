@@ -12,18 +12,20 @@ struct MovieRow : View {
 	
 	let movie: Movie
 	
-    var body: some View {
+	var body: some View {
 		
-		HStack() {
-			VStack(alignment: .leading) {
-				Text(movie.title)
-				Text(movie.releaseDate)
+		VStack {
+			HStack() {
+				VStack(alignment: .leading) {
+					Text(movie.title)
+					Text(movie.releaseDate)
+				}
+				
+				Spacer()
+				Text(String(format:"Rating: %.1f", movie.rating))
 			}
-			
-			Spacer()
-			Text(String(format:"Rating: %.1f", movie.rating))
 		}
-    }
+	}
 }
 
 #if DEBUG
@@ -31,8 +33,8 @@ struct MovieRow : View {
 let testMovie = Movie(id: 1, posterPath: "http:\\somePath.com", backdrop: "test Backdrop", title: "Some Title", releaseDate: "June 10, 2019", rating: 3.5, overview: "It was a great movie")
 
 struct MovieRow_Previews : PreviewProvider {
-    static var previews: some View {
+	static var previews: some View {
 		MovieRow(movie: testMovie)
-    }
+	}
 }
 #endif
